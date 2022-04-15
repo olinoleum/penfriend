@@ -2,10 +2,7 @@
 
 :root {
     --clr-text: black;
-    --clr-primary: #212529;
-    --clr-green: #326647;
-    --clr-red: #990033;
-    --clr-blue: #333366;
+    --clr-botMessageBackground: #f5f5fa;
     --clr-background: #c5c5c5;
 }
 
@@ -89,7 +86,8 @@ nav ul {
 
 .message-field {
     display: flex;
-    padding: 1em 0;
+    padding: 1em 1em;
+    border-radius: 1em;
 }
 
 .conversation-field {
@@ -114,4 +112,12 @@ nav ul {
     justify-content: center;
     gap: 1em;
     padding: 2em 0;
+}
+
+.message {
+    padding-left: 0.5em;
+}
+
+.sender-bot {
+    background: var(--clr-botMessageBackground);
 }

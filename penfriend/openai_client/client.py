@@ -1,14 +1,22 @@
 # Standard library imports
 import os
+from pathlib import Path
 
 # Third party imports
 import openai
+from dotenv import load_dotenv
 
 # Local application imports
 
-openai.api_key = os.getenv("OPEN_API_KEY")
+load_dotenv(Path().cwd() / 'penfriend/.env')
 
-def openai_completion(engine: str, prompt: str, stop: str):
+OPEN_API_KEY = os.environ.get("OPEN_API_KEY")
+
+openai.api_key = OPEN_API_KEY
+
+
+def openai_completion(engine: str, prompt: str, stop: str) -> dict:
+
     response = openai.Completion.create(
         engine=engine,
         prompt=prompt,

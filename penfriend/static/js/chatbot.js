@@ -18,6 +18,12 @@ function addNewMessage(sender, msg) {
     senderElement.className = "sender";
     senderElement.textContent = sender;
 
+    if (sender == "Bot:") {
+        msgField.classList.add("sender-bot");
+    } else {
+        msgField.classList.add("sender-user");
+    }
+
     var messageElement = document.createElement("div");
     messageElement.className = "message";
     messageElement.textContent = msg;
@@ -41,6 +47,8 @@ function sendResponseRequest() {
         currentConversationArr.push(sender+msg);
     });
 
+    currentConversationArr.push("Bot:")
+
     var currentConversation = currentConversationArr.join("\n")
     console.log("fetching data");
     fetchData("POST", "/getResponse", {"engine":engineLevel,
@@ -59,6 +67,7 @@ function fetchData(method, endpoint, body){
 
 
     req.done(function(data){
+            console.log(data);
             addNewMessage("Bot:", data);
             return false;
             });
