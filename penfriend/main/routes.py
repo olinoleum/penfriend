@@ -1,7 +1,7 @@
 # Standard library imports
 
 # Third party imports
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, jsonify, make_response
 
 # Local application imports
 from penfriend.chatbot import chatbot
@@ -17,6 +17,7 @@ def index():
 @main.route("/getResponse", methods=["GET", "POST"])
 def get_response():
     if request.method == "POST":
-        current_conversation = request.json
-        response = chatbot.get_response(current_conversation)
-        print(response)
+        conversation_data = request.json
+        response = chatbot.get_response(conversation_data['engine'], conversation_data['prompt'])
+        return make_response(jsonify(response), 200)
+

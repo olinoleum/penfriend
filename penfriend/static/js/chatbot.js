@@ -4,8 +4,8 @@ const sendBtn = document.getElementById("send-button");
 
 function getResponse() {
     addNewMessage("You:", msgSent.value);
-    var botResponse = sendResponseRequest();
-    addNewMessage("Bot:", botResponse);
+    sendResponseRequest();
+    msgSent.value = "";
 }
 
 function addNewMessage(sender, msg) {
@@ -36,10 +36,38 @@ function sendResponseRequest() {
     var currentConversationArr = [];
 
     messages.forEach(function(msgField) {
-        currentConversationArr.push(msgField.textContent);
+        var sender = msgField.querySelector(".sender").textContent;
+        var msg = msgField.querySelector(".message").textContent;
+        currentConversationArr.push(sender+msg);
     });
 
-    var currentConversation = currentConversationArr.join("\n");
-    console.log(currentConversation);
-    return "This is bot at level " + engineLevel;
+    var currentConversation = currentConversationArr.join("\n")
+    console.log("fetching data");
+    fetchData("POST", "/getResponse", {"engine":engineLevel,
+    "prompt":currentConversation
+    });
 };
+
+function fetchData(method, endpoint, body){
+    event.preventDefault();
+    req = $.ajax({
+        type: method,
+        url: endpoint,
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(body)});
+
+
+    req.done(function(data){
+            addNewMessage("Bot:", data);
+            return false;
+            });
+    };
+
+
+$(document).ready(function(){
+    $("#send-button").on("click", function(){
+        getResponse();
+    })
+
+});
