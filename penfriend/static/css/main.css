@@ -107,7 +107,7 @@ nav ul {
     flex-grow: 2;
 }
 
-.choose-level {
+.choose-level, .choose-lang {
     display: flex;
     justify-content: center;
     gap: 1em;
