@@ -38,6 +38,7 @@ function addNewMessage(sender, msg) {
 
 function sendResponseRequest() {
     var engineLevel = document.getElementById("level-choice").value;
+    var lang = document.getElementById("lang").value;
     var messages = document.querySelectorAll(".message-field");
     var currentConversationArr = [];
 
@@ -52,7 +53,7 @@ function sendResponseRequest() {
     var currentConversation = currentConversationArr.join("\n")
     console.log("fetching data");
     fetchData("POST", "/getResponse", {"engine":engineLevel,
-    "prompt":currentConversation
+    "prompt":currentConversation, "lang": lang
     });
 };
 
