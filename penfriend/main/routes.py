@@ -18,7 +18,6 @@ def index():
 def get_response():
     if request.method == "POST":
         conversation_data = request.json
-        print(conversation_data['lang'])
         response = chatbot.get_response(conversation_data['engine'], conversation_data['prompt'],
                                         conversation_data['lang'])
         return make_response(jsonify(response), 200)

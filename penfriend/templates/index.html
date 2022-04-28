@@ -2,36 +2,36 @@
 
 {% block head %}
 
-<div class="choose-lang">
-    <div>Wybierz język</div>
-    <select id="lang">
-        <option value="EN-GB">Angielski</option>
-        <option value="PL">Polski</option>
-    </select>
-</div>
+<div class="main-container">
+    <div class="chat-container">
+        <div class="header">
+            Train Your English!
+        </div>
+        <div class="messages">
 
-<div class="choose-level">
-    <div>Wybierz poziom znajomości języka</div>
-
-    <select id="level-choice">
-        <option value="text-babbage-001">Easy</option>
-        <option value="text-curie-001">Medium</option>
-        <option value="text-davinci-002">Wise</option>
-    </select>
-</div>
-
-<div id="chat">
-    <div class="conversation-field">
-        <div class="message-field sender-bot">
-            <div class="sender">Bot:</div>
-            <div class="message">Hello, my name is Adrian. How are you?</div>
+        </div>
+        <div class="send">
+            <form class="chat"><input type="text" placeholder="Your message"><input type="submit" value="Send"></form>
         </div>
     </div>
-    <div class="message-input-field">
-        <input type="text" id="message-sent">
-        <button id="send-button">Send</button>
-    </div>
 </div>
 
-<script src="{{url_for('static', filename='js/chatbot.js')}}"></script>
+<nav role="navigation">
+    <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+            <li><label>AI engine level: </label><select id="ai-engine"><option>Easy - babbage</option><option>Medium - curie</option><option>Hard - davinci</option></select></li>
+            <li><label>Language: </label><select id="language"><option>English</option><option>Polish</option></select></li>
+            <li><label>Interlocutor: </label><select><option>Friendly AI</option><option>Sarcastic Marv</option></select></li>
+            <li><label>Translate option: </label><select><option>No</option><option>Yes</option></select></li>
+            <li><label>Lang mistakes: </label><select><option>Don't show</option><option>Show me</option></select></li>
+            <a href="#"><li>Info</li></a>
+        </ul>
+    </div>
+</nav>
+
+<script src="{{url_for('static', filename='js/chat.js')}}"></script>
 {% endblock %}

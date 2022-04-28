@@ -1,4 +1,5 @@
 # Standard library imports
+import logging
 
 # Third Party imports
 from flask import Flask
@@ -8,6 +9,8 @@ from flask import Flask
 
 def create_app():
     app = Flask(__name__)
+
+    logging.basicConfig(level=logging.DEBUG)
 
     from penfriend.main.routes import main
 

@@ -1,6 +1,7 @@
 # Standard library imports
 import os
 from pathlib import Path
+from enum import Enum
 
 # Third party imports
 import openai
@@ -13,6 +14,12 @@ load_dotenv(Path().cwd() / 'penfriend/.env')
 OPEN_API_KEY = os.environ.get("OPEN_API_KEY")
 
 openai.api_key = OPEN_API_KEY
+
+
+class GPT3Engine(Enum):
+    EASY = "text-babbage-001"
+    MEDIUM = "text-curie-001"
+    HARD = "text-davinci-002"
 
 
 def openai_completion(engine: str, prompt: str, stop: str) -> dict:
