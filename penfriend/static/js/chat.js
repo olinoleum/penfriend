@@ -24,9 +24,15 @@ function responsiveChat(element) {
                 "</p></div></div>"
             );
             var messagesText = grabAllMessages(element);
-            fetchData("POST", "/getResponse", {"engine":$("#ai-engine option:selected").text(),
-                                                "prompt":messagesText,
-                                                "lang": $("#language option:selected").text()});
+
+            var conversationData = {"engine":$("#ai-engine option:selected").text(),
+                                    "prompt":messagesText,
+                                    "lang": $("#language option:selected").text(),
+                                    "langMistakes": $("#lang-mistakes option:selected").text(),
+                                    "translate": $("#translate option:selected").text()
+                                    }
+
+            fetchData("POST", "/getResponse", conversationData);
 
         }
         $(element + ' input[type="text"]').val("");
@@ -74,7 +80,28 @@ function fetchData(method, endpoint, body){
 
 
     req.done(function(data){
-            responsiveChatPush(".chat-container", "you", data);
+
+            if ("correctedMessage" in data) {
+                var correctedMessage = data["correctedMessage"].trim();
+                var lastMessage = $(".myMessage").last();
+                var lastMessageText = lastMessage.find("p").text().trim();
+                if (lastMessageText != correctedMessage){
+                    $(".myMessage").last().attr("data-corrected",correctedMessage);
+                }
+
+            }
+
+            responsiveChatPush(".chat-container", "you", data.chatbotResponse);
+
+            if ("translatedResponse" in data){
+            console.log("translating last response");
+                var translatedResponse = data["translatedResponse"].trim();
+                console.log(translatedResponse);
+                var lastBotMessage = $(".fromThem").last();
+                console.log(lastBotMessage);
+                lastBotMessage.attr("data-translated", translatedResponse);
+            }
+
             return false;
             });
     };

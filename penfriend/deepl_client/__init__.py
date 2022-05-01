@@ -19,7 +19,7 @@ class LANGUAGES(Enum):
     POLISH = "PL"
 
 
-def translate(text: str, target_lang: str = "PL"):
+def translate(text: str, target_lang: str = LANGUAGES.POLISH.value):
     translator = deepl.Translator(DEEPL_AUTH_KEY)
     translated_text = translator.translate_text(text, target_lang=target_lang)
     return translated_text

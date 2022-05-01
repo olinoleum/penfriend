@@ -35,3 +35,16 @@ def openai_completion(engine: str, prompt: str, stop: str) -> dict:
         stop=[stop]
     )
     return response
+
+
+def openai_grammar_correction(prompt: str) -> dict:
+    response = openai.Completion.create(
+        engine=GPT3Engine.HARD.value,
+        prompt=f"Correct this to standard English:\n\n{prompt}",
+        temperature=0,
+        max_tokens=60,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+    )
+    return response

@@ -252,3 +252,61 @@ form.chat input[type='submit']{
 {
   transform: none;
 }
+
+/* If user makes a mistake in a message */
+div[data-corrected] {
+    position: relative;
+    cursor: help;
+    color: red;
+}
+
+div[data-corrected]:hover::after,
+div[data-corrected]:focus::after {
+    content: attr(data-corrected);
+    position: absolute;
+    left: 0;
+    top: 2em;
+    min-width: 200px;
+    border: 1px #aaaaaa solid;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1em;
+    z-index: 1;
+    color: black;
+}
+
+/* if user want to translate bot message */
+div[data-translated] {
+    position: relative;
+    cursor: help;
+
+}
+
+div[data-translated]:hover::after,
+div[data-translated]:focus::after {
+    content: attr(data-translated);
+    position: absolute;
+    left: 2em;
+    top: 2em;
+    min-width: 200px;
+    border: 1px #aaaaaa solid;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1em;
+    z-index: 1;
+    color: black;
+}
+
+div[data-translated]::before {
+    content: "i";
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #4dbebc;
+    left: 0;
+    top: 1.7em;
+    background-color: #4dbebc;
+    height: 1em;
+    width: 1em;
+    color: white;
+
+}
