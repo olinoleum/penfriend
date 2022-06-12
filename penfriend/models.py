@@ -21,6 +21,17 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String(88))
+    cookie_id = db.Column(db.Integer)
+    messages = db.relationship("Message", backref="message", primaryjoin=id==Message.user_id, lazy='dynamic')
+
+    def __repr__(self):
+        return f"{self.id} - {self.email} - {self.cookie_id}"
+
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
@@ -48,17 +59,6 @@ class Message(db.Model):
             return True
         else:
             return False
-
-
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String, unique=True)
-    password = db.Column(db.String(88))
-    cookie_id = db.Column(db.Integer)
-    messages = db.relationship("Message", backref="message", primaryjoin=id==Message.user_id, lazy='dynamic')
-
-    def __repr__(self):
-        return f"{self.id} - {self.email} - {self.cookie_id}"
 
 
 @event.listens_for(User.__table__, "after_create")
