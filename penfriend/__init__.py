@@ -20,7 +20,7 @@ class MyAdminIndexView(AdminIndexView):
 
 load_dotenv('penfriend/.env')
 
-uri = os.environ.get("SQLALCHEMY_DATABASE_URI")  # or other relevant config var
+uri = os.environ.get("DATABASE_URL")  # or other relevant config var
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 
