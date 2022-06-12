@@ -61,9 +61,9 @@ class User(db.Model, UserMixin):
         return f"{self.id} - {self.email} - {self.cookie_id}"
 
 
-@event.listens_for(User.__table__, "after_create")
-def create_bot_user(*args, **kwargs):
-    bot_user = User(email="bot@bot.com")
-
-    db.session.add(bot_user)
-    db.session.commit()
+# @event.listens_for(User.__table__, "after_create")
+# def create_bot_user(*args, **kwargs):
+#     bot_user = User(email="bot@bot.com")
+#
+#     db.session.add(bot_user)
+#     db.session.commit()
