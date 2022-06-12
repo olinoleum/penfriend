@@ -23,8 +23,8 @@ def load_user(user_id):
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('User.id'))
-    receiver = db.Column(db.Integer(), db.ForeignKey('User.id'))
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    receiver = db.Column(db.Integer(), db.ForeignKey('user.id'))
     ts = db.Column(db.DateTime(timezone=True), server_default=func.now())
     msg = db.Column(db.String)
     lang = db.Column(db.String)
@@ -55,7 +55,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String(88))
     cookie_id = db.Column(db.Integer)
-    messages = db.relationship("Message", backref="Message", primaryjoin=id==Message.user_id, lazy='dynamic')
+    messages = db.relationship("Message", backref="message", primaryjoin=id==Message.user_id, lazy='dynamic')
 
     def __repr__(self):
         return f"{self.id} - {self.email} - {self.cookie_id}"
