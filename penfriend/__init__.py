@@ -42,11 +42,11 @@ def create_app():
     migrate.init_app(app, db, render_as_batch=True)
     admin.init_app(app)
 
-    @app.before_first_request
-    def create_tables():
-        from penfriend.models import User, Message
-        with app.app_context():
-            db.create_all()
+    # @app.before_first_request
+    # def create_tables():
+    #     from penfriend.models import User, Message
+    #     with app.app_context():
+    #         db.create_all()
 
     from penfriend.main.routes import main
     from penfriend.adminbp.routes import adminblueprint
