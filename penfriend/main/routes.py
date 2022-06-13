@@ -18,7 +18,7 @@ main = Blueprint("main", __name__)
 
 
 def uniqueid():
-    seed = random.getrandbits(32)
+    seed = random.getrandbits(9)
     while True:
         yield seed
         seed += 1
