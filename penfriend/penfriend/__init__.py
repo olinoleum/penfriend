@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_admin import Admin, AdminIndexView
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 # Local application imports
 
@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
         return True
-
 
 load_dotenv('penfriend/.env')
 
@@ -42,11 +41,11 @@ def create_app():
     migrate.init_app(app, db, render_as_batch=True)
     admin.init_app(app)
 
-    # @app.before_first_request
-    # def create_tables():
-    #     from penfriend.models import User, Message
-    #     with app.app_context():
-    #         db.create_all()
+    @app.before_first_request
+    def create_tables():
+        from penfriend.models import User, Message
+        with app.app_context():
+            db.create_all()
 
     from penfriend.main.routes import main
     from penfriend.adminbp.routes import adminblueprint
