@@ -53,6 +53,9 @@ class CurrentConversation:
 
 
 class Chatbot:
+    """
+    Class that handles the interaction with chatbot
+    """
     def __init__(self, engine: str, current_conversation: CurrentConversation):
         self.engine = OPENAI_ENGINES.get(engine, client.GPT3Engine.EASY.value)
         self.current_conversation = current_conversation

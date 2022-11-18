@@ -20,6 +20,7 @@ class LANGUAGES(Enum):
 
 
 def translate(text: str, target_lang: str = LANGUAGES.POLISH.value):
+    """Translate message from one language to another using deepl API"""
     translator = deepl.Translator(DEEPL_AUTH_KEY)
     translated_text = translator.translate_text(text, target_lang=target_lang)
     return translated_text
